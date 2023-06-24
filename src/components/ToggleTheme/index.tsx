@@ -4,6 +4,14 @@ import React from "react";
 export const ToggleTheme: React.FC = () => {
   const [isDark, setIsDark] = React.useState(false);
 
+  const systemPreference = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+
+  React.useEffect(() => {
+    systemPreference && document.documentElement.classList.add("dark");
+  }, [systemPreference]);
+
   const toggle = () => {
     document.documentElement.classList.toggle("dark");
     setIsDark((r) => !r);
